@@ -25,7 +25,7 @@
 	
 	<body>
 		<div id="d">
-			<h2 style="margin-bottom:4px">Large mesh test</h2> by <a href="http://alteredqualia.com/" target="_blank">AlteredQualia</a><br /><br />
+			<h1>Large mesh test</h1>
 
 			<span id="rcanvas" class="button inactive">2d canvas renderer</span>
 			<span id="rwebgl" class="button">WebGL renderer</span>
@@ -34,18 +34,20 @@
 			<p>Lucy model from <a href="http://graphics.stanford.edu/data/3Dscanrep/">Stanford 3d scanning repository</a> 
 			(decimated with <a href="http://meshlab.sourceforge.net/">Meshlab</a>).
 			
-			<p>Please be patient while the mesh is loading. It may take a while, it's 3.5MB file.
+			<p>Please be patient while the mesh is loading. It may take a while, it's 2MB file.
 			
 			<br/>
-			<p>Best with Chrome 8/9 or Firefox 4 using WebGL renderer.
+			<p>Best viewed in Chrome 8/9 or Firefox 4 using WebGL renderer.
 			<p>Canvas renderer is very slow for this demo and only diffuse material works there.
+			<p>Use the flag --allow-file-access-from-files if working localy in Chrome.
 		</div>
 		
 		<pre id="log"></pre>
 
 		<script type="text/javascript" src="../build/Three.js"></script>
-		
-		<script type="text/javascript" src="geometry/primitives/Sphere.js"></script>
+
+		<script type="text/javascript" src="../src/extras/io/Loader.js"></script>
+		<script type="text/javascript" src="../src/extras/primitives/Sphere.js"></script>
 
 		<script type="text/javascript" src="js/Stats.js"></script>
 
@@ -137,7 +139,7 @@
 
 				// light representation
 				sphere = new Sphere( 100, 16, 8, 1 );
-				lightMesh = new THREE.Mesh( sphere, new THREE.MeshColorFillMaterial( 0xffaa00 ) );
+				lightMesh = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) );
 				lightMesh.scale.x = lightMesh.scale.y = lightMesh.scale.z = 0.05;
 				lightMesh.position = pointLight.position;
 				lightMesh.overdraw = true;
@@ -176,17 +178,17 @@
 				var s = (new Date).getTime();
 				
 				var loader = new THREE.Loader();
-				//loader.loadAsync( "obj/lucy/Lucy100k.js", function() { createScene( new Lucy100k(), s ) } );
-				loader.loadWorker( 'obj/lucy/Lucy100k_slim.js', function( geometry ) { createScene( geometry, s ) } );
-				
+				//loader.loadAscii( 'obj/lucy/Lucy100k_slim.js', function( geometry ) { createScene( geometry, s ) } );
+				loader.loadBinary( 'obj/lucy/Lucy100k_bin.js', function( geometry ) { createScene( geometry, s ) }, "obj/lucy" );
+
 			}
 			
 			function createScene( geometry, start ) {
 				
-				addMesh( geometry, 0.75, 900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( 0x030303, 0x030303, 0x990000, 30, 1.0 ) );
+				addMesh( geometry, 0.75, 900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x030303, specular: 0x990000, shininess: 30 } ) );
 				addMesh( geometry, 0.75, 300, 0, 0, 0,0,0, new THREE.MeshFaceMaterial( ) );
-				addMesh( geometry, 0.75, -300, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( 0x030303, 0x111111, 0xffaa00, 10, 1.0 )  );
-				addMesh( geometry, 0.75, -900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( 0x030303, 0x555555, 0x666666, 10, 1.0 )  );
+				addMesh( geometry, 0.75, -300, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x111111, specular: 0xffaa00, shininess: 10 } ) );
+				addMesh( geometry, 0.75, -900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x555555, specular: 0x666666, shininess: 10 } ) );
 				
 				log( "geometry.vertices: " + geometry.vertices.length );
 				log( "geometry.faces: " + geometry.faces.length );
