@@ -69,14 +69,14 @@
 				context.fillRect( 0, 0, texture_placeholder.width, texture_placeholder.height );
 
 				var materials = [];
-				materials.push( [ loadTexture( 'textures/skymap_px.jpg' ), wireframe ] );
-				materials.push( [ loadTexture( 'textures/skymap_nx.jpg' ), wireframe ] );
-				materials.push( [ loadTexture( 'textures/skymap_py.jpg' ), wireframe ] );
-				materials.push( [ loadTexture( 'textures/skymap_ny.jpg' ), wireframe ] );
-				materials.push( [ loadTexture( 'textures/skymap_pz.jpg' ), wireframe ] );
-				materials.push( [ loadTexture( 'textures/skymap_nz.jpg' ), wireframe ] );
+				materials.push( [ loadTexture( 'textures/skymap_px.jpg' ), wireframe ] ); // right
+				materials.push( [ loadTexture( 'textures/skymap_nx.jpg' ), wireframe ] ); // left
+				materials.push( [ loadTexture( 'textures/skymap_py.jpg' ), wireframe ] ); // top
+				materials.push( [ loadTexture( 'textures/skymap_ny.jpg' ), wireframe ] ); // bottom
+				materials.push( [ loadTexture( 'textures/skymap_pz.jpg' ), wireframe ] ); // back
+				materials.push( [ loadTexture( 'textures/skymap_nz.jpg' ), wireframe ] ); // front
 
-				mesh = new THREE.Mesh( new Cube( 100, 100, 100, 7, 7, materials, true ), new THREE.MeshFaceMaterial() );
+				mesh = new THREE.Mesh( new Cube( 300, 300, 300, 7, 7, materials, true ), new THREE.MeshFaceMaterial() );
 				mesh.overdraw = true;
 				scene.addObject( mesh );
 
