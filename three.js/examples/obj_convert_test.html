@@ -15,7 +15,7 @@
 			h1 { }
 			a { color:skyblue }
 			canvas { pointer-events:none; z-index:10; position:relative; }
-			#log { position:absolute; top:0; display:block; text-align:left; z-index:1000 }
+			#log { position:absolute; top:0; display:block; text-align:left; z-index:1000; pointer-events:none; }
 			#d { text-align:center; margin:1em 0 -15.7em 0; z-index:0; position:relative; display:block }
 			.button { background:#000; color:#fff; padding:0.2em 0.5em; cursor:pointer }
 			.inactive { background:#999; color:#eee }
@@ -118,7 +118,7 @@
 				xc.fillRect(96, 96, 32, 32);
 				
 				var xm = new THREE.MeshBasicMaterial( { map: new THREE.Texture( x ) } );
-				xm.map.loaded = 1;
+				xm.map.image.loaded = 1;
 				
 				geometry = new Plane( 100, 100, 15, 10 );
 				for(var i=0; i<geometry.uvs.length; i++) {
@@ -170,7 +170,7 @@
 
 				if ( render_gl ) {
 					try {
-						webglRenderer = new THREE.WebGLRenderer();
+						webglRenderer = new THREE.WebGLRenderer( scene );
 						webglRenderer.setFaceCulling(0);
 						webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 						container.appendChild( webglRenderer.domElement );
@@ -244,7 +244,7 @@
 					xc.fillText(i, 10, 64);
 					
 					var xm = new THREE.MeshBasicMaterial( { map: new THREE.Texture( x ) } );
-					xm.map.loaded = 1;
+					xm.map.image.loaded = 1;
 					
 					mesh = new THREE.Mesh( new Plane( size, size ), xm );
 					mesh.position.x = i * (size + 5) - ( ( materials.length - 1 )* ( size + 5 )/2);
@@ -283,7 +283,7 @@
 
 			}
 
-			function log(text) {
+			function log( text ) {
 			
 				var e = document.getElementById("log");
 				e.innerHTML = text + "<br/>" + e.innerHTML;

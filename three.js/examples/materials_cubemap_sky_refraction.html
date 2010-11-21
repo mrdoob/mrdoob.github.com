@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>three.js - webgl cube reflection</title>
+		<title>three.js - webgl cube refraction</title>
 		<meta charset="utf-8">
 		<style type="text/css">
 			body {
@@ -30,7 +30,7 @@
 	</head>
 
 	<body>
-		<div id="info"><a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - webgl cube reflection demo. skybox by <a href="http://www.zfight.com/" target="_blank">Jochum Skoglund</a></div>
+		<div id="info"><a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - webgl cube refraction demo. skybox by <a href="http://www.zfight.com/" target="_blank">Jochum Skoglund</a></div>
 
 		<script type="text/javascript" src="../build/Three.js"></script> 
 
@@ -97,7 +97,7 @@
 					 r + "front1024.jpg", r + "back1024.jpg" ];
 
 				var images = loadImageArray( urls );
-				var material = new THREE.MeshBasicMaterial( { color: 0xffffff, env_map: new THREE.TextureCube( images ) } );
+				var material = new THREE.MeshBasicMaterial( { color: 0xffffff, env_map: new THREE.TextureCube( images, THREE.RefractionMap ), refraction_ratio: 0.75 } );
 
 				var mesh = new THREE.Mesh( geometry, material );
 				mesh.position.x = 100;

@@ -1,19 +1,22 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>three.js - materials</title>
+		<title>three.js - materials WebGL</title>
 		<meta charset="utf-8">
 		<style type="text/css">
 			body {
 				font-family: Monospace;
-				background-color: #202020;
+				background-color: #000;
 				margin: 0px;
 				overflow: hidden;
 			}
+			#log { color:#fff; position:absolute; top:50px; text-align:left; display:block; z-index:100; pointer-events:none; }
 		</style>
 	</head>
 	<body>
 
+		<pre id="log"></pre>
+		
 		<script type="text/javascript" src="../build/Three.js"></script>
 
 		<script type="text/javascript" src="../src/extras/primitives/Sphere.js"></script>
@@ -65,24 +68,34 @@
 
 				// Spheres
 
-				var geometry = new Sphere( 100, 14, 8, false );
+				var geometry1 = new Sphere( 70, 32, 16, true );
 
 				var generatedTexture = new THREE.Texture( generateTexture() );
 				generatedTexture.image.loaded = 1;
 
 				var materials = [];
-				materials.push( { material: new THREE.MeshBasicMaterial( { color: 0x00ffff, wireframe: true } ), overdraw: false, doubleSided: true } );
-				//materials.push( { material: new THREE.MeshBasicMaterial( { color: 0xff0000, blending: THREE.SubtractiveBlending } ), overdraw: false, doubleSided: true } );
-				materials.push( { material: new THREE.MeshBasicMaterial( { color: 0xff0000, blending: THREE.AdditiveBlending } ), overdraw: false, doubleSided: true } );
-				materials.push( { material: new THREE.MeshLambertMaterial( { color: 0xffffff } ), overdraw: true, doubleSided: false } );
-				materials.push( { material: new THREE.MeshPhongMaterial( { ambient: 0x030383, color: 0xf55555, specular: 0x66f6f6, shininess: 10 } ), overdraw: true, doubleSided: false } );
-				materials.push( { material: new THREE.MeshDepthMaterial( { near: 1, far: 2000 } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } ), overdraw: true, doubleSided: false } );
 				materials.push( { material: new THREE.MeshNormalMaterial( ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshBasicMaterial( { color: 0x665500, blending: THREE.AdditiveBlending } ), overdraw: false, doubleSided: true } );
+				//materials.push( { material: new THREE.MeshBasicMaterial( { color: 0xff0000, blending: THREE.SubtractiveBlending } ), overdraw: false, doubleSided: true } );
+
+				materials.push( { material: new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.SmoothShading } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.SmoothShading } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshBasicMaterial( { color: 0xffaa00, wireframe: true } ), overdraw: false, doubleSided: true } );
+
+				materials.push( { material: new THREE.MeshDepthMaterial( { near: 1, far: 2000 } ), overdraw: true, doubleSided: false } );
 				materials.push( { material: new THREE.MeshBasicMaterial( { map: generatedTexture } ), overdraw: true, doubleSided: false } );
+				materials.push( { material: new THREE.MeshLambertMaterial( { map: generatedTexture } ), overdraw: true, doubleSided: false } );
 
-				for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
+				// Extra mesh to be broken down for MeshFaceMaterial
+				
+				var geometry2 = new Sphere( 70, 32, 16, true );
+				
+				for ( var i = 0, l = geometry2.faces.length; i < l; i ++ ) {
 
-					var face = geometry.faces[ i ];
+					var face = geometry2.faces[ i ];
 					if ( Math.random() > 0.7 ) face.material = [ materials[ Math.floor( Math.random() * materials.length )  ].material ];
 
 				}
@@ -91,14 +104,19 @@
 
 				objects = [];
 
+				var sphere, geometry;
+				
 				for ( var i = 0, l = materials.length; i < l; i ++ ) {
-
-					var sphere = new THREE.Mesh( geometry, materials[ i ].material );
+				
+					geometry = materials[ i ].material instanceof THREE.MeshFaceMaterial ? geometry2 : geometry1;
+						
+					sphere = new THREE.Mesh( geometry, materials[ i ].material );
+					
 					sphere.overdraw = materials[ i ].overdraw;
 					sphere.doubleSided = materials[ i ].doubleSided;
 
-					sphere.position.x = ( i % 5 ) * 200 - 400;
-					sphere.position.z = Math.floor( i / 5 ) * 200 - 200;
+					sphere.position.x = ( i % 4 ) * 200 - 400;
+					sphere.position.z = Math.floor( i / 4 ) * 200 - 200;
 
 					sphere.rotation.x = Math.random() * 200 - 100;
 					sphere.rotation.y = Math.random() * 200 - 100;
@@ -110,14 +128,12 @@
 
 				}
 
-				//particleLight = new THREE.Particle( new THREE.ParticleCircleMaterial( { color: 0xffffff } ) );
-				//particleLight.scale.x = particleLight.scale.y = particleLight.scale.z = 4;
 				particleLight = new THREE.Mesh( new Sphere( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) );
 				scene.addObject( particleLight );
 
 				// Lights
 
-				scene.addLight( new THREE.AmbientLight( Math.random() * 0x202020 ) );
+				scene.addLight( new THREE.AmbientLight( 0x202020 ) );
 
 				var directionalLight = new THREE.DirectionalLight( Math.random() * 0xffffff );
 				directionalLight.position.x = Math.random() - 0.5;
@@ -129,8 +145,7 @@
 				pointLight = new THREE.PointLight( 0xffffff, 1 );
 				scene.addLight( pointLight );
 
-				renderer = new THREE.CanvasRenderer();
-				// renderer = new THREE.WebGLRenderer();
+				renderer = new THREE.WebGLRenderer( scene );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				container.appendChild( renderer.domElement );
@@ -211,6 +226,13 @@
 				renderer.render( scene, camera );
 
 				stats.update();
+			}
+			
+			function log( text ) {
+			
+				var e = document.getElementById("log");
+				e.innerHTML = text + "<br/>" + e.innerHTML;
+				
 			}
 
 		</script>
