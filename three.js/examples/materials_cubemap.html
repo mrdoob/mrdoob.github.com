@@ -54,6 +54,8 @@
 
 			var mesh, zmesh, lightMesh, geometry;
 
+			var loader;
+			
 			var directionalLight, pointLight;
 
 			var mouseX = 0;
@@ -106,7 +108,7 @@
 				var images = ImageUtils.loadArray( urls );
 
 				var reflectionCube = new THREE.TextureCube( images );
-				var refractionCube = new THREE.TextureCube( images, THREE.RefractionMap );
+				var refractionCube = new THREE.TextureCube( images, THREE.RefractionMapping );
 				
 				//var cubeMaterial3 = new THREE.MeshPhongMaterial( { color: 0x000000, specular:0xaa0000, env_map: new THREE.TextureCube( images ), combine: THREE.Mix, reflectivity: 0.25 } );
 				var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xff6600, env_map: reflectionCube, combine: THREE.Mix, reflectivity: 0.3 } );
@@ -129,7 +131,9 @@
 				stats.domElement.style.zIndex = 100;
 				container.appendChild( stats.domElement );
 
-				var loader = new THREE.Loader();
+				loader = new THREE.Loader( true );
+				document.body.appendChild( loader.statusDomElement );
+				
 				loader.loadBinary( "obj/walt/WaltHead_bin.js", function( geometry ) { createScene( geometry, cubeMaterial1, cubeMaterial2, cubeMaterial3 ) }, "obj/walt" );
 
 			}
@@ -141,6 +145,8 @@
 				SceneUtils.addMesh( scene, geometry, s,      0, 0, -100, 0,0,0, m1 );
 				SceneUtils.addMesh( scene, geometry, s,   -900, 0, -100, 0,0,0, m2 );
 				SceneUtils.addMesh( scene, geometry, s,    900, 0, -100, 0,0,0, m3 );
+				
+				loader.statusDomElement.style.display = "none";
 
 			}
 

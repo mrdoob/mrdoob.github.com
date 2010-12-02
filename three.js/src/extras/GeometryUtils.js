@@ -22,7 +22,7 @@ var GeometryUtils = {
 
 			var vertexCopy = new THREE.Vertex( vertex.position.clone() );
 
-			isMesh && object2.matrix.transform( vertexCopy.position );
+			isMesh && object2.matrix.multiplyVector3( vertexCopy.position );
 
 			vertices1.push( vertexCopy );
 
@@ -43,12 +43,17 @@ var GeometryUtils = {
 
 			}
 
+			faceCopy.centroid.copy( face.centroid );
+			faceCopy.normal.copy( face.normal );
+
 			for ( var j = 0, jl = faceVertexNormals.length; j < jl; j ++ ) {
 
 				normal = faceVertexNormals[ j ];
 				faceCopy.vertexNormals.push( normal.clone() );
 
 			}
+
+			faceCopy.material = face.material.slice();
 
 			faces1.push( faceCopy );
 

@@ -10,7 +10,7 @@
 				overflow: hidden;
 			}
 
-			#info {			
+			#info {
 				position: absolute;
 				top: 0px; width: 100%;
 				color: #ffffff;
@@ -39,7 +39,7 @@
 		</div>
 
 		<script type="text/javascript" src="../build/Three.js"></script> 
-		<script type="text/javascript" src="geometry/WaltHead.js"></script> 
+		<script type="text/javascript" src="obj/WaltHead.js"></script> 
 
 		<script type="text/javascript">
 
@@ -60,7 +60,7 @@
 
 				scene = new THREE.Scene();
 
-				object = new THREE.Mesh( new WaltHead(), new THREE.MeshLambertMaterial( { color: 0xffffff } ) );
+				object = new THREE.Mesh( new WaltHead(), new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading } ) );
 				object.overdraw = true;
 				scene.addObject( object );
 

@@ -3,8 +3,8 @@ var Qrcode = function () {
 	THREE.Geometry.call( this );
 
 	var scope = this,
-	m1 = new THREE.MeshLambertMaterial( { color: 0x000000 } ),
-	m2 = new THREE.MeshLambertMaterial( { color: 0xc0c0c0 } );
+	m1 = new THREE.MeshLambertMaterial( { color: 0x000000, shading: THREE.FlatShading } ),
+	m2 = new THREE.MeshLambertMaterial( { color: 0xc0c0c0, shading: THREE.FlatShading } );
 
 	v(-54,134,58);
 	v(-54,146,58);
@@ -1435,6 +1435,7 @@ var Qrcode = function () {
 
 	this.computeCentroids();
 	this.computeNormals();
+	this.sortFacesByMaterial();
 
 	function v( x, y, z ) {
 
