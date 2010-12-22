@@ -108,6 +108,8 @@ var Sphere = function ( radius, segments_width, segments_height ) {
 	this.computeVertexNormals();
 	this.sortFacesByMaterial();
 
+	this.boundingSphere = { radius: radius };
+
 }
 
 Sphere.prototype = new THREE.Geometry();
