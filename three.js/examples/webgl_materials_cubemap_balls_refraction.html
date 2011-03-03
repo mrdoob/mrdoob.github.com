@@ -80,7 +80,6 @@
 				sceneCube = new THREE.Scene();
 
 				var geometry = new Sphere( 100, 32, 16 );
-				geometry.sortFacesByMaterial();
 
 				var path = "textures/cube/skybox/";
 				var format = '.jpg';
@@ -91,7 +90,7 @@
 					];
 
 				var textureCube = ImageUtils.loadTextureCube( urls, new THREE.CubeRefractionMapping() );
-				var material = new THREE.MeshBasicMaterial( { color: 0xffffff, env_map: textureCube, refraction_ratio: 0.95 } );
+				var material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube, refractionRatio: 0.95 } );
 
 				for ( var i = 0; i < 200; i ++ ) {
 

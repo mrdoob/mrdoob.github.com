@@ -86,7 +86,7 @@
 				container = document.getElementById( 'container' );
 
 				camera = new THREE.QuakeCamera( { fov: 60, aspect: window.innerWidth / window.innerHeight, near: 1, far: 20000,
-												  movement_speed: 15, look_speed: 0.005, nofly: false, look_vertical: true } );
+												  movementSpeed: 15, lookSpeed: 0.005, noFly: false, lookVertical: true } );
 
 				camera.target.position.z = - 100;
 
@@ -368,7 +368,7 @@
 
 						sides = { px: px, nx: nx, py: true, ny: false, pz: pz, nz: nz };
 
-						cube = new Cube( 100, 100, 100, 1, 1, materials, false, sides );
+						cube = new Cube( 100, 100, 100, 1, 1, 1, materials, false, sides );
 
 						// set UV tiles
 
@@ -433,8 +433,6 @@
 					}
 
 				}
-
-				geometry.sortFacesByMaterial();
 
 				mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 				scene.addObject( mesh );

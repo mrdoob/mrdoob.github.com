@@ -118,16 +118,13 @@
 				geometry3.vertices = geometry2.vertices = geometry.vertices;
 				geometry3.faces = geometry2.faces = geometry.faces;
 
-				geometry2.sortFacesByMaterial();
-				geometry3.sortFacesByMaterial();
-
 				geometry.colors = colors;
 				geometry2.colors = colors2;
 				geometry3.colors = colors3;
 
 				var materials = [
 
-					new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, vertex_colors: true } ),
+					new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, vertexColors: true } ),
 					new THREE.MeshBasicMaterial( { color: 0x000000, shading: THREE.FlatShading, wireframe: true } )
 
 				];

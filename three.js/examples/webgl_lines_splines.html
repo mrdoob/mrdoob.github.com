@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>three.js webgl - lines - cubes - colors</title>
+		<title>three.js webgl - lines - splines</title>
 		<meta charset="utf-8">
 		<style type="text/css">
 			body {
@@ -39,7 +39,7 @@
 	<body>
 
 		<div id="info">
-			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - color lines WebGL demo
+			<a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - splines WebGL demo
 			[<a href="http://en.wikipedia.org/wiki/Hilbert_curve">Hilbert curve</a> thanks to <a href="http://www.openprocessing.org/visuals/?visualID=15599">Thomas Diewald</a>]
 		</div>
 
@@ -53,6 +53,8 @@
 
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
+			var postprocessing = false;
+			
 			var mouseX = 0, mouseY = 0,
 
 			windowHalfX = window.innerWidth / 2,
@@ -67,7 +69,7 @@
 
 			function init() {
 
-				var i, container;
+				var i, n_sub, container;
 
 				container = document.createElement('div');
 				document.body.appendChild(container);
@@ -85,22 +87,33 @@
 				var geometry = new THREE.Geometry(),
 					geometry2 = new THREE.Geometry(),
 					geometry3 = new THREE.Geometry(),
-					points = hilbert3D( new THREE.Vector3( 0,0,0 ), 200.0, 2, 0, 1, 2, 3, 4, 5, 6, 7 ),
+					points = hilbert3D( new THREE.Vector3( 0,0,0 ), 200.0, 1, 0, 1, 2, 3, 4, 5, 6, 7 ),
 					colors = [], colors2 = [], colors3 = [];
 
-				for ( i = 0; i < points.length; i ++ ) {
+				n_sub = 6;
 
-					geometry.vertices.push( new THREE.Vertex( points[ i ] ) );
+				var position, index;
+				
+				var spline = new THREE.Spline();
+				
+				for ( i = 0; i < points.length * n_sub; i ++ ) {
+				
+					index = i / ( points.length * n_sub );
+					position = spline.get2DPoint( points, index );
+					
+					geometry.vertices[ i ] = new THREE.Vertex( new THREE.Vector3( position.x, position.y, position.z ) );
 
 					colors[ i ] = new THREE.Color( 0xffffff );
-					colors[ i ].setHSV( 0.6, ( 200 + points[ i ].x ) / 400, 1.0 );
+					colors[ i ].setHSV( 0.6, ( 200 + position.x ) / 400, 1.0 );
 
 					colors2[ i ] = new THREE.Color( 0xffffff );
-					colors2[ i ].setHSV( 0.3, 1.0, ( 200 + points[ i ].x ) / 400 );
+					//colors2[ i ].setHSV( 0.1, 1.0, ( 200 + position.x ) / 400 );
+					colors2[ i ].setHSV( 0.9, ( 200 + position.y ) / 400, 1.0 );
 
 					colors3[ i ] = new THREE.Color( 0xffffff );
-					colors3[ i ].setHSV( i / points.length, 1.0, 1.0 );
-
+					colors3[ i ].setHSV( i / ( points.length * n_sub ), 1.0, 1.0 );
+					
+					
 				}
 
 				geometry2.vertices = geometry3.vertices = geometry.vertices;
@@ -273,7 +286,6 @@
 			function animate() {
 
 				requestAnimationFrame( animate );
-
 				render();
 
 			}
@@ -292,43 +304,50 @@
 
 				}
 
-				//renderer.render( scene, camera );
-
 				renderer.clear();
 
-				// Render scene into texture
+				if ( postprocessing ) {
+				
+					// Render scene into texture
 
-				renderer.render( scene, camera, rtTexture1 );
+					renderer.render( scene, camera, rtTexture1 );
 
-				// Render quad with blured scene into texture (convolution pass 1)
+					// Render quad with blured scene into texture (convolution pass 1)
 
-				quadScreen.materials = [ materialConvolution ];
+					quadScreen.materials = [ materialConvolution ];
 
-				materialConvolution.uniforms.tDiffuse.texture = rtTexture1;
-				materialConvolution.uniforms.uImageIncrement.value = blurx;
+					materialConvolution.uniforms.tDiffuse.texture = rtTexture1;
+					materialConvolution.uniforms.uImageIncrement.value = blurx;
 
-				renderer.render( sceneScreen, cameraOrtho, rtTexture2 );
+					renderer.render( sceneScreen, cameraOrtho, rtTexture2 );
 
-				// Render quad with blured scene into texture (convolution pass 2)
+					// Render quad with blured scene into texture (convolution pass 2)
 
-				materialConvolution.uniforms.tDiffuse.texture = rtTexture2;
-				materialConvolution.uniforms.uImageIncrement.value = blury;
+					materialConvolution.uniforms.tDiffuse.texture = rtTexture2;
+					materialConvolution.uniforms.uImageIncrement.value = blury;
 
-				renderer.render( sceneScreen, cameraOrtho, rtTexture3 );
+					renderer.render( sceneScreen, cameraOrtho, rtTexture3 );
 
-				// Render original scene with superimposed blur to texture
+					// Render original scene with superimposed blur to texture
 
-				quadScreen.materials = [ materialScreen ];
+					quadScreen.materials = [ materialScreen ];
 
-				materialScreen.uniforms.tDiffuse.texture = rtTexture3;
-				materialScreen.uniforms.opacity.value = 1.3;
+					materialScreen.uniforms.tDiffuse.texture = rtTexture3;
+					materialScreen.uniforms.opacity.value = 1.3;
 
-				renderer.render( sceneScreen, cameraOrtho, rtTexture1, false );
+					renderer.render( sceneScreen, cameraOrtho, rtTexture1, false );
 
-				// Render to screen
+					// Render to screen
 
-				materialScreen.uniforms.tDiffuse.texture = rtTexture1;
-				renderer.render( sceneScreen, cameraOrtho );
+					materialScreen.uniforms.tDiffuse.texture = rtTexture1;
+					renderer.render( sceneScreen, cameraOrtho );
+
+				} else {
+				
+					renderer.render( scene, camera );
+
+				}
+
 
 			}
 
