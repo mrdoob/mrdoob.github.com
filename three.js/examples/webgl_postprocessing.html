@@ -280,24 +280,24 @@
 
 				// background
 
-				renderer.render( sceneBG, cameraOrtho, rtTexture1 );
+				renderer.render( sceneBG, cameraOrtho, rtTexture1, true );
 
 				// model
 
-				renderer.render( sceneModel, cameraPerspective, rtTexture1 );
+				renderer.render( sceneModel, cameraPerspective, rtTexture1, false );
 
 				// Render quad with blured scene into texture (convolution pass 1)
 
 				quadScreen.materials = [ materialConvolution ];
 				materialConvolution.uniforms.tDiffuse.texture = rtTexture1;
 				materialConvolution.uniforms.uImageIncrement.value = blurx;
-				renderer.render( sceneScreen, cameraOrtho, rtTexture2 );
+				renderer.render( sceneScreen, cameraOrtho, rtTexture2, true );
 
 				// Render quad with blured scene into texture (convolution pass 2)
 
 				materialConvolution.uniforms.tDiffuse.texture = rtTexture2;
 				materialConvolution.uniforms.uImageIncrement.value = blury;
-				renderer.render( sceneScreen, cameraOrtho, rtTexture3 );
+				renderer.render( sceneScreen, cameraOrtho, rtTexture3, true );
 
 				// Render original scene with superimposed blur into texture
 
