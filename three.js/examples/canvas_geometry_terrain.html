@@ -34,7 +34,6 @@
 		<div id="info"><a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - terrain demo. <a href="geometry_terrain.html">generate another</a></div> 
 
 		<script type="text/javascript" src="../build/Three.js"></script>
-		<script type="text/javascript" src="../src/extras/primitives/Plane.js"></script>
 
 		<script type="text/javascript" src="js/ImprovedNoise.js"></script>
 
@@ -121,7 +120,7 @@
 					for ( var i = 0; i < size; i ++ ) {
 
 						var x = i % width, y = ~~ ( i / width );
-						data[ i ] += Math.abs( perlin.noise( x / quality, y / quality, z ) * 0.5 * quality + 10 );
+						data[ i ] += Math.floor( Math.abs( perlin.noise( x / quality, y / quality, z ) * 0.5 ) * quality + 10 );
 
 
 					}

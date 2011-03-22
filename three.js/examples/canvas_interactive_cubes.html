@@ -15,7 +15,6 @@
 	<body>
 
 		<script type="text/javascript" src="../build/Three.js"></script>
-		<script type="text/javascript" src="../src/extras/primitives/Cube.js"></script>
 
 		<script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
 		<script type="text/javascript" src="js/Stats.js"></script>
@@ -24,6 +23,7 @@
 
 			var container, stats;
 			var camera, scene, projector, renderer;
+			var particleMaterial;
 
 			init();
 			animate();
@@ -65,6 +65,22 @@
 
 				}
 
+				var PI2 = Math.PI * 2;
+				particleMaterial = new THREE.ParticleCanvasMaterial( {
+
+					color: 0x000000,
+					program: function ( context, color ) {
+
+						context.fillStyle = color.__styleString;
+						context.beginPath();
+						context.arc( 0, 0, 1, 0, PI2, true );
+						context.closePath();
+						context.fill();
+
+					}
+
+				} );
+
 				projector = new THREE.Projector();
 
 				renderer = new THREE.CanvasRenderer();
@@ -96,7 +112,7 @@
 
 					intersects[ 0 ].object.materials[ 0 ].color.setHex( Math.random() * 0xffffff );
 
-					var particle = new THREE.Particle( new THREE.ParticleCircleMaterial( { color: 0x000000 } ) );
+					var particle = new THREE.Particle( particleMaterial );
 					particle.position = intersects[ 0 ].point;
 					particle.scale.x = particle.scale.y = 8;
 					scene.addObject( particle );

@@ -4,10 +4,13 @@
 //  materials: 6
 //
 //  Generated with OBJ -> Three.js converter
-//  http://github.com/alteredq/three.js/blob/master/utils/exporters/convert_obj_threejs_slim.py
+//  http://github.com/alteredq/three.js/blob/master/utils/exporters/convert_obj_three.py
 
 
 var model = {
+
+    'version' : 1,
+
     'materials': [	{
 	"DbgColor" : 0xeeeeee,
 	"DbgIndex" : 0,
@@ -16,7 +19,7 @@ var model = {
 	"colorDiffuse" : [0.64000000000000001, 0.64000000000000001, 0.64000000000000001],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_03_-_Default1noCulling.JPG",
+	"mapDiffuse" : "03_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -30,7 +33,7 @@ var model = {
 	"colorDiffuse" : [0.64000000000000001, 0.64000000000000001, 0.64000000000000001],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_02_-_Default1noCulling.JPG",
+	"mapDiffuse" : "02_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -44,7 +47,7 @@ var model = {
 	"colorDiffuse" : [0.80000000000000004, 0.80000000000000004, 0.80000000000000004],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_02_-_Default1noCulling.JPG",
+	"mapDiffuse" : "02_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -58,7 +61,7 @@ var model = {
 	"colorDiffuse" : [0.80000000000000004, 0.80000000000000004, 0.80000000000000004],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_03_-_Default1noCulling.JPG",
+	"mapDiffuse" : "03_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -72,7 +75,7 @@ var model = {
 	"colorDiffuse" : [0.64000000000000001, 0.64000000000000001, 0.64000000000000001],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_01_-_Default1noCulling.JPG",
+	"mapDiffuse" : "01_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -86,7 +89,7 @@ var model = {
 	"colorDiffuse" : [0.80000000000000004, 0.80000000000000004, 0.80000000000000004],
 	"colorSpecular" : [0.16500000000000001, 0.16500000000000001, 0.16500000000000001],
 	"illumination" : 2,
-	"mapDiffuse" : "_01_-_Default1noCulling.JPG",
+	"mapDiffuse" : "01_-_Default1noCulling.JPG",
 	"opticalDensity" : 1.0,
 	"specularCoef" : 154.901961,
 	"transparency" : 1.0
@@ -95,6 +98,7 @@ var model = {
     'buffers': 'Female02_bin.bin',
 
     'end': (new Date).getTime()
-    }
+    
+};
     
 postMessage( model );

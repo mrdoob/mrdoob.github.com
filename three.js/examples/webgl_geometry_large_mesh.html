@@ -45,7 +45,7 @@
 		<pre id="log"></pre>
 
 		<script type="text/javascript" src="../build/Three.js"></script>
-
+		
 		<script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
 		<script type="text/javascript" src="js/Stats.js"></script>
 
@@ -77,10 +77,10 @@
 			var render_canvas = 1, render_gl = 1;
 			var has_gl = 0;
 
-			var bcanvas = document.getElementById("rcanvas");
-			var bwebgl = document.getElementById("rwebgl");
+			var bcanvas = document.getElementById( "rcanvas" );
+			var bwebgl = document.getElementById( "rwebgl" );
 
-			document.addEventListener('mousemove', onDocumentMouseMove, false);
+			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 			init();
 			animate();
@@ -107,8 +107,8 @@
 
 			function init() {
 
-				container = document.createElement('div');
-				document.body.appendChild(container);
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
 
 				camera = new THREE.Camera( 50, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 100000 );
 				camera.position.z = 1500;
@@ -141,7 +141,7 @@
 				lightMesh.position = pointLight.position;
 				lightMesh.overdraw = true;
 				lightMesh.updateMatrix();
-				scene.addObject(lightMesh);
+				scene.addObject( lightMesh );
 
 
 				if ( render_gl ) {
@@ -169,25 +169,26 @@
 				stats.domElement.style.zIndex = 100;
 				container.appendChild( stats.domElement );
 
-				bcanvas.addEventListener("click", toggleCanvas, false);
-				bwebgl.addEventListener("click", toggleWebGL, false);
+				bcanvas.addEventListener( "click", toggleCanvas, false );
+				bwebgl.addEventListener( "click", toggleWebGL, false );
 
-				loader = new THREE.Loader( true );
+				loader = new THREE.BinaryLoader( true );
+				//loader = new THREE.JSONLoader( true );
 				document.body.appendChild( loader.statusDomElement );
 
 				var s = (new Date).getTime(),
 					callback = function( geometry ) { createScene( geometry, s ) };
 
-				//loader.loadAscii( { model: 'obj/lucy/Lucy100k_slim.js', callback: callback } );
-				loader.loadBinary( { model: 'obj/lucy/Lucy100k_bin.js', callback: callback } );
+				//loader.load( { model: 'obj/lucy/Lucy100k_slim.js', callback: callback } );
+				loader.load( { model: 'obj/lucy/Lucy100k_bin.js', callback: callback } );
 
 			}
 
 
 			function createScene( geometry, start ) {
 
-				addMesh( geometry, 0.75, 900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x030303, specular: 0x990000, shininess: 30 } ) );
-				addMesh( geometry, 0.75, 300, 0, 0, 0,0,0, new THREE.MeshFaceMaterial( ) );
+				addMesh( geometry, 0.75, 900, 0, 0,  0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x030303, specular: 0x990000, shininess: 30 } ) );
+				addMesh( geometry, 0.75, 300, 0, 0,  0,0,0, new THREE.MeshFaceMaterial( ) );
 				addMesh( geometry, 0.75, -300, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x111111, specular: 0xffaa00, shininess: 10 } ) );
 				addMesh( geometry, 0.75, -900, 0, 0, 0,0,0, new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0x555555, specular: 0x666666, shininess: 10 } ) );
 
