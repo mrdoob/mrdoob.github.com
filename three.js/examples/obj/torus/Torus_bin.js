@@ -1,6 +1,6 @@
 // Converted from: ../../examples/obj/torus/Torus.obj
 //  vertices: 576
-//  faces: 576 
+//  faces: 576
 //  materials: 1
 //
 //  Generated with OBJ -> Three.js converter
@@ -22,3 +22,4 @@ var model = {
 };
     
 postMessage( model );
+close();

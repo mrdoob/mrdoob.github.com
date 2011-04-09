@@ -129,7 +129,7 @@
 				for ( j = 0; j < ygrid; j++ ) {
 
 					materials[c] = new THREE.MeshBasicMaterial( { color:0xffffff, vertexColors:true } );
-					materials[c].program = material_base.program;
+					//materials[c].program = material_base.program;
 
 					ribbon = new THREE.Ribbon( i % 2 ? geometry : geometry2, materials[c] );
 					ribbon.rotation.x = 0;
@@ -231,13 +231,13 @@
 				postprocessing.camera.projectionMatrix = THREE.Matrix4.makeOrtho( window.innerWidth / - 2, window.innerWidth / 2,  window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
 				postprocessing.camera.position.z = 100;
 
-				var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter };
+				var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
 				postprocessing.rtTexture1 = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, pars );
 				postprocessing.rtTexture2 = new THREE.WebGLRenderTarget( 512, 512, pars );
 				postprocessing.rtTexture3 = new THREE.WebGLRenderTarget( 512, 512, pars );
 
-				var screen_shader = ShaderUtils.lib["screen"];
-				var screen_uniforms = Uniforms.clone( screen_shader.uniforms );
+				var screen_shader = THREE.ShaderUtils.lib["screen"];
+				var screen_uniforms = THREE.UniformsUtils.clone( screen_shader.uniforms );
 
 				screen_uniforms["tDiffuse"].texture = postprocessing.rtTexture1;
 				screen_uniforms["opacity"].value = 1.0;
@@ -252,15 +252,15 @@
 
 				} );
 
-				var convolution_shader = ShaderUtils.lib["convolution"];
-				var convolution_uniforms = Uniforms.clone( convolution_shader.uniforms );
+				var convolution_shader = THREE.ShaderUtils.lib["convolution"];
+				var convolution_uniforms = THREE.UniformsUtils.clone( convolution_shader.uniforms );
 
 				postprocessing.blurx = new THREE.Vector2( 0.001953125, 0.0 ),
 				postprocessing.blury = new THREE.Vector2( 0.0, 0.001953125 );
 
 				convolution_uniforms["tDiffuse"].texture = postprocessing.rtTexture1;
 				convolution_uniforms["uImageIncrement"].value = postprocessing.blurx;
-				convolution_uniforms["cKernel"].value = ShaderUtils.buildKernel( 4.0 );
+				convolution_uniforms["cKernel"].value = THREE.ShaderUtils.buildKernel( 4.0 );
 
 				postprocessing.materialConvolution = new THREE.MeshShaderMaterial( {
 
@@ -270,7 +270,7 @@
 
 				} );
 
-				postprocessing.quad = new THREE.Mesh( new Plane( window.innerWidth, window.innerHeight ), postprocessing.materialConvolution );
+				postprocessing.quad = new THREE.Mesh( new THREE.Plane( window.innerWidth, window.innerHeight ), postprocessing.materialConvolution );
 				postprocessing.quad.position.z = -500;
 				postprocessing.scene.addObject( postprocessing.quad );
 

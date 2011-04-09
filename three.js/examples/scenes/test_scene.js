@@ -259,7 +259,7 @@ var scene = {
 	
 	"lambert_green": {
 		"type": "MeshLambertMaterial",
-		"parameters": { color: 0x007711, blending: "AdditiveBlending" } 
+		"parameters": { color: 0x007711, blending: "AdditiveBlending", transparent: true } 
 	},
 
 	"lambert_blue": {
@@ -441,3 +441,4 @@ var scene = {
 };
 
 postMessage( scene );
+close();
