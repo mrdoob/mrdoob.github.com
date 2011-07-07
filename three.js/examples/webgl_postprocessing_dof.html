@@ -102,9 +102,9 @@
 
 				if( singleMaterial ) zmaterial = [ cubeMaterial ];
 
-				//var geo = new THREE.Cube( 1, 1, 1 );
-				//var geo = new THREE.Icosahedron( 2 );
-				var geo = new THREE.Sphere( 1, 20, 10 );
+				//var geo = new THREE.CubeGeometry( 1, 1, 1 );
+				//var geo = new THREE.IcosahedronGeometry( 2 );
+				var geo = new THREE.SphereGeometry( 1, 20, 10 );
 
 				var start = new Date().getTime();
 
@@ -259,7 +259,7 @@
 
 				} );
 
-				postprocessing.quad = new THREE.Mesh( new THREE.Plane( window.innerWidth, window.innerHeight ), postprocessing.materialBokeh );
+				postprocessing.quad = new THREE.Mesh( new THREE.PlaneGeometry( window.innerWidth, window.innerHeight ), postprocessing.materialBokeh );
 				postprocessing.quad.position.z = - 500;
 				postprocessing.scene.addObject( postprocessing.quad );
 
@@ -299,21 +299,12 @@
 
 					// Render scene into texture
 
-					if ( singleMaterial )
-						zmaterial[ 0 ] = cubeMaterial;
-					else
-						for( i = 0; i < nobjects; i++ ) objects[ i ].materials[ 0 ] = materials[ i ];
-
-
+					scene.overrideMaterial = null;
 					renderer.render( scene, camera, postprocessing.rtTextureColor, true );
 
 					// Render depth into texture
 
-					if ( singleMaterial )
-						zmaterial[ 0 ] = material_depth;
-					else
-						for( i = 0; i < nobjects; i++ ) objects[i].materials[ 0 ] = material_depth;
-
+					scene.overrideMaterial = material_depth;
 					renderer.render( scene, camera, postprocessing.rtTextureDepth, true );
 
 					// Render bokeh composite
