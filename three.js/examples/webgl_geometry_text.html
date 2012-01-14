@@ -51,7 +51,6 @@
 		<script src="js/postprocessing/FilmPass.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<!-- load the font files -->
@@ -159,18 +158,20 @@
 
 				permalink = document.getElementById( "permalink" );
 
+				// SCENE
+
+				scene = new THREE.Scene();
+				scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
+
 				// CAMERA
 
 				camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1500 );
 				camera.position.set( 0, 400, 700 );
+				scene.add( camera );
 
 				cameraTarget = new THREE.Vector3( 0, 150, 0 );
 
-				// SCENE
-
-				scene = new THREE.Scene();
-
-				scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
+				// LIGHTS
 
 				var dirLight = new THREE.DirectionalLight( 0xffffff, 0.125 );
 				dirLight.position.set( 0, 0, 1 ).normalize();
@@ -493,7 +494,7 @@
 
 				}
 
-				var centerOffset = -0.5 * ( textGeo.boundingBox.x[ 1 ] - textGeo.boundingBox.x[ 0 ] );
+				var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
 
 				textMesh1 = new THREE.Mesh( textGeo, faceMaterial );
 

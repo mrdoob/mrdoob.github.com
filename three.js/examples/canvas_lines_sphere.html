@@ -20,8 +20,6 @@
 
 		<script src="../build/Three.js"></script>
 
-		<script src="js/RequestAnimationFrame.js"></script>
-
 		<script>
 
 			var SCREEN_WIDTH = window.innerWidth,
@@ -54,9 +52,11 @@
 
 				scene = new THREE.Scene();
 
+				scene.add( camera );
+
 				renderer = new THREE.CanvasRenderer();
-				renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-				container.appendChild(renderer.domElement);
+				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				container.appendChild( renderer.domElement );
 
 				// particles
 

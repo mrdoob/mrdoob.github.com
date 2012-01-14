@@ -17,7 +17,6 @@
 
 		<script src="../build/Three.js"></script>
 
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -44,12 +43,14 @@
 
 				//
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.y = 300;
+				scene.add( camera );
 
 				camera.target = new THREE.Vector3( 0, 150, 0 );
 
-				scene = new THREE.Scene();
 
 				//
 

@@ -40,7 +40,6 @@
 		<script src="../build/Three.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<!-- HDR fragment shader -->
@@ -126,10 +125,12 @@
 
 				container = document.getElementById( 'container' );
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.z = 900;
+				scene.add( camera );
 
-				scene = new THREE.Scene();
 
 				directionalLight = new THREE.DirectionalLight( 0xffffff );
 				directionalLight.position.set( 0, 0, 1 ).normalize();

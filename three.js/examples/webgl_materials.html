@@ -18,7 +18,6 @@
 		<script src="../build/Three.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -38,10 +37,12 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
 				camera.position.set( 0, 200, 800 );
+				scene.add( camera );
 
-				scene = new THREE.Scene();
 
 				// Grid
 
@@ -64,11 +65,11 @@
 
 				// Materials
 
-				var generatedTexture = new THREE.Texture( generateTexture() );
-				generatedTexture.needsUpdate = true;
+				var texture = new THREE.Texture( generateTexture() );
+				texture.needsUpdate = true;
 
 				var materials = [];
-				materials.push( new THREE.MeshLambertMaterial( { map: generatedTexture } ) );
+				materials.push( new THREE.MeshLambertMaterial( { map: texture, transparent: true } ) );
 				materials.push( new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } ) );
 				materials.push( new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } ) );
 				materials.push( new THREE.MeshNormalMaterial( ) );
@@ -76,12 +77,12 @@
 				//materials.push( new THREE.MeshBasicMaterial( { color: 0xff0000, blending: THREE.SubtractiveBlending } ) );
 
 				materials.push( new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.SmoothShading } ) );
-				materials.push( new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.SmoothShading, map: THREE.ImageUtils.loadTexture( "textures/planets/earth_specular_2048.jpg" ) } ) );
+				materials.push( new THREE.MeshPhongMaterial( { ambient: 0x030303, color: 0xdddddd, specular: 0x009900, shininess: 30, shading: THREE.SmoothShading, map: texture, transparent: true } ) );
 				materials.push( new THREE.MeshNormalMaterial( { shading: THREE.SmoothShading } ) );
 				materials.push( new THREE.MeshBasicMaterial( { color: 0xffaa00, wireframe: true } ) );
 
 				materials.push( new THREE.MeshDepthMaterial() );
-				materials.push( new THREE.MeshBasicMaterial( { map: generatedTexture } ) );
+				materials.push( new THREE.MeshBasicMaterial( { map: texture, transparent: true } ) );
 
 				// Spheres geometry
 
@@ -188,8 +189,10 @@
 					x = j % 256;
 					y = x == 0 ? y + 1 : y;
 
-					image.data[ i + 2 ] = Math.floor( x ^ y );
-					image.data[ i + 3 ] = 255;
+					image.data[ i ] = 255;
+					image.data[ i + 1 ] = 255;
+					image.data[ i + 2 ] = 255;
+					image.data[ i + 3 ] = Math.floor( x ^ y );
 
 				}
 

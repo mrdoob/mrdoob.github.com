@@ -18,7 +18,6 @@
 
 		<script src="obj/Qrcode.js"></script>
 
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -51,6 +50,8 @@
 				camera.position.z = 500;
 
 				scene = new THREE.Scene();
+
+				scene.add( camera );
 
 				// QRCODE
 
@@ -151,7 +152,7 @@
 				svgRenderer.setQuality( 'low' );
 				container.appendChild( svgRenderer.domElement );
 
-				webglRenderer = new THREE.WebGLRenderer();
+				webglRenderer = new THREE.WebGLRenderer( { antialias: true } );
 				webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 				// webglRenderer.setFaceCulling( 0 );
 				container.appendChild( webglRenderer.domElement );

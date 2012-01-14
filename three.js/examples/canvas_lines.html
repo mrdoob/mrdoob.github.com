@@ -20,8 +20,6 @@
 
 		<script src="../build/Three.js"></script>
 
-		<script src="js/RequestAnimationFrame.js"></script>
-
 		<script>
 
 			var mouseX = 0, mouseY = 0,
@@ -50,6 +48,8 @@
 				camera.position.z = 100;
 
 				scene = new THREE.Scene();
+
+				scene.add( camera );
 
 				renderer = new THREE.CanvasRenderer();
 				renderer.setSize( window.innerWidth, window.innerHeight );

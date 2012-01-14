@@ -19,7 +19,6 @@
 	<body>
 		<script src="../build/Three.js"></script>
 
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -48,6 +47,8 @@
 				camera.position.z = 1000;
 
 				scene = new THREE.Scene();
+
+				scene.add( camera );
 
 				particles = new Array();
 

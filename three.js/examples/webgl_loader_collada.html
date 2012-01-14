@@ -17,7 +17,6 @@
 		<script src="../build/Three.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -31,13 +30,13 @@
 			var dae, skin;
 
 			var loader = new THREE.ColladaLoader();
+			loader.options.convertUpAxis = true;
 			loader.load( './models/monster.dae', function colladaReady( collada ) {
 
 				dae = collada.scene;
 				skin = collada.skins[ 0 ];
 
 				dae.scale.x = dae.scale.y = dae.scale.z = 0.002;
-				dae.rotation.x = -Math.PI/2;
 				dae.updateMatrix();
 
 				init();
@@ -50,10 +49,11 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
 				camera.position.set( 2, 2, 3 );
-
-				scene = new THREE.Scene();
+				scene.add( camera );
 
 				// Grid
 

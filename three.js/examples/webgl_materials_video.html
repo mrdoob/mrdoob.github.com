@@ -48,7 +48,6 @@
 		<script src="js/postprocessing/ShaderPass.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 
 		<video id="video" autoplay loop style="display:none">
 			<source src="textures/sintel.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -89,10 +88,11 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.z = 500;
-
-				scene = new THREE.Scene();
+				scene.add( camera );
 
 				var light = new THREE.DirectionalLight( 0xffffff );
 				light.position.set( 0.5, 1, 1 ).normalize();
@@ -108,6 +108,7 @@
 				texture = new THREE.Texture( video );
 				texture.minFilter = THREE.LinearFilter;
 				texture.magFilter = THREE.LinearFilter;
+				texture.format = THREE.RGBFormat;
 
 				//
 

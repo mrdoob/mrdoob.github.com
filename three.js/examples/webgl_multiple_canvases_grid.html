@@ -79,7 +79,6 @@
 		<script src="../build/Three.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script>
@@ -137,11 +136,12 @@
 
 					container = document.getElementById( containerId );
 
+					scene = new THREE.Scene();
+
 					camera = new THREE.PerspectiveCamera( 20, container.clientWidth / container.clientHeight, 1, 10000 );
 					camera.setViewOffset( fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight );
 					camera.position.z = 1800;
-
-					scene = new THREE.Scene();
+					scene.add( camera );
 
 					light = new THREE.DirectionalLight( 0xffffff );
 					light.position.set( 0, 0, 1 ).normalize();

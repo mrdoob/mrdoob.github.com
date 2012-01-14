@@ -39,7 +39,6 @@
 		<script src="../build/Three.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/RequestAnimationFrame.js"></script>
 		<script src="js/Stats.js"></script>
 
 		<script id="fragment_shader4" type="x-shader/x-fragment">
@@ -115,9 +114,6 @@
 		</script>
 
 		<script id="fragment_shader1" type="x-shader/x-fragment">
-			#ifdef GL_ES
-			precision highp float;
-			#endif
 
 			uniform vec2 resolution;
 			uniform float time;
@@ -194,10 +190,11 @@
 
 				container = document.getElementById( 'container' );
 
+				scene = new THREE.Scene();
+
 				camera = new THREE.PerspectiveCamera( 40, windowHalfX / windowHalfY, 1, 3000 );
 				camera.position.z = 4;
-
-				scene = new THREE.Scene();
+				scene.add( camera );
 
 				start_time = Date.now();
 
