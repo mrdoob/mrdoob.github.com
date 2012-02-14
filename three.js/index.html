@@ -1,9 +1,9 @@
-<!doctype html> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8"> 
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> 
-		<title>three.js examples</title>
+		<title>three.js - JavaScript 3D library</title>
 		<style>
 			body {
 
@@ -19,10 +19,17 @@
 
 			h1 { 
 				font-size: 30px;
+				margin-bottom: 10px;
 			}
 
 			h2 { 
 				font-size: 20px;
+				margin-bottom: 15px;
+			}
+
+			img {
+				margin-bottom: -4px;
+
 			}
 
 			#panel	{
@@ -32,7 +39,7 @@
 				left: 0px;
 				top: 0px;
 
-				width: 180px;
+				width: 200px;
 				height: 100%;
 
 				padding: 20px 0px 0px 20px;
@@ -47,138 +54,182 @@
 
 		<div id="panel">
 			<h1>three.js</h1>
-			<a href="http://mrdoob.github.com/three.js/docs/latest/">documentation</a>
-			<a href="http://github.com/mrdoob/three.js/contributors">contributors</a>
-			<a href="http://github.com/mrdoob/three.js/">github</a>
+			<a href="http://github.com/mrdoob/three.js/contributors">contributors</a><br />
+			<br />
+			<a href="http://mrdoob.github.com/three.js/docs/latest/">documentation</a><br />
+			<a href="https://github.com/mrdoob/three.js/issues">issues</a><br />
+			<a href="https://github.com/mrdoob/three.js/wiki">wiki</a><br />
+			<a href="http://github.com/mrdoob/three.js/">github</a><br />
 		</div>
 
 		<h2>CanvasRenderer</h2>
 
-		<a href="examples/canvas_camera_orthographic.html"><img src="assets/examples/canvas_camera_orthographic.png"></a>
-		<a href="examples/canvas_geometry_birds.html"><img src="assets/examples/canvas_geometry_birds.png"></a>
-		<a href="examples/canvas_geometry_cube.html"><img src="assets/examples/canvas_geometry_cube.png"></a>
-		<a href="examples/canvas_geometry_earth.html"><img src="assets/examples/canvas_geometry_earth.png"></a>
-		<a href="examples/canvas_geometry_hierarchy.html"><img src="assets/examples/canvas_geometry_hierarchy.png"></a>
-		<a href="examples/canvas_geometry_panorama.html"><img src="assets/examples/canvas_geometry_panorama.png"></a>
-		<a href="examples/canvas_geometry_panorama_fisheye.html"><img src="assets/examples/canvas_geometry_panorama_fisheye.png"></a>
-		<a href="examples/canvas_geometry_terrain.html"><img src="assets/examples/canvas_geometry_terrain.png"></a>
-		<a href="examples/canvas_geometry_text.html"><img src="assets/examples/canvas_geometry_text.png"></a>
-		<a href="examples/canvas_interactive_cubes.html"><img src="assets/examples/canvas_interactive_cubes.png"></a>
-		<a href="examples/canvas_interactive_cubes_tween.html"><img src="assets/examples/canvas_interactive_cubes_tween.png"></a>
-		<a href="examples/canvas_interactive_particles.html"><img src="assets/examples/canvas_interactive_particles.png"></a>
-		<a href="examples/canvas_interactive_voxelpainter.html"><img src="assets/examples/canvas_interactive_voxelpainter.png"></a>
-		<a href="examples/canvas_lights_pointlights.html"><img src="assets/examples/canvas_lights_pointlights.png"></a>
-		<a href="examples/canvas_lights_pointlights_smooth.html"><img src="assets/examples/canvas_lights_pointlights_smooth.png"></a>
-		<a href="examples/canvas_lines.html"><img src="assets/examples/canvas_lines.png"></a>
-		<a href="examples/canvas_lines_sphere.html"><img src="assets/examples/canvas_lines_sphere.png"></a>
-		<a href="examples/canvas_materials.html"><img src="assets/examples/canvas_materials.png"></a>
-		<a href="examples/canvas_materials_depth.html"><img src="assets/examples/canvas_materials_depth.png"></a>
-		<a href="examples/canvas_materials_normal.html"><img src="assets/examples/canvas_materials_normal.png"></a>
-		<a href="examples/canvas_materials_reflection.html"><img src="assets/examples/canvas_materials_reflection.png"></a>
-		<a href="examples/canvas_materials_video.html"><img src="assets/examples/canvas_materials_video.png"></a>
-		<a href="examples/canvas_particles_floor.html"><img src="assets/examples/canvas_particles_floor.png"></a>
-		<a href="examples/canvas_particles_random.html"><img src="assets/examples/canvas_particles_random.png"></a>
-		<a href="examples/canvas_particles_shapes.html"><img src="assets/examples/canvas_particles_shapes.png"></a>
-		<a href="examples/canvas_particles_sprites.html"><img src="assets/examples/canvas_particles_sprites.png"></a>
-		<a href="examples/canvas_particles_waves.html"><img src="assets/examples/canvas_particles_waves.png"></a>
-		<a href="examples/canvas_performance.html"><img src="assets/examples/canvas_performance.png"></a>
-		<a href="examples/canvas_sandbox.html"><img src="assets/examples/canvas_sandbox.png"></a>
+		<script>
+
+		var files = [
+			{ link: "examples/canvas_camera_orthographic.html", image: "assets/examples/canvas_camera_orthographic.png" },
+			{ link: "examples/canvas_geometry_birds.html", image: "assets/examples/canvas_geometry_birds.png" },
+			{ link: "examples/canvas_geometry_cube.html", image: "assets/examples/canvas_geometry_cube.png" },
+			{ link: "examples/canvas_geometry_earth.html", image: "assets/examples/canvas_geometry_earth.png" },
+			{ link: "examples/canvas_geometry_hierarchy.html", image: "assets/examples/canvas_geometry_hierarchy.png" },
+			{ link: "examples/canvas_geometry_panorama.html", image: "assets/examples/canvas_geometry_panorama.png" },
+			{ link: "examples/canvas_geometry_panorama_fisheye.html", image: "assets/examples/canvas_geometry_panorama_fisheye.png" },
+			{ link: "examples/canvas_geometry_terrain.html", image: "assets/examples/canvas_geometry_terrain.png" },
+			{ link: "examples/canvas_geometry_text.html", image: "assets/examples/canvas_geometry_text.png" },
+			{ link: "examples/canvas_interactive_cubes.html", image: "assets/examples/canvas_interactive_cubes.png" },
+			{ link: "examples/canvas_interactive_cubes_tween.html", image: "assets/examples/canvas_interactive_cubes_tween.png" },
+			{ link: "examples/canvas_interactive_particles.html", image: "assets/examples/canvas_interactive_particles.png" },
+			{ link: "examples/canvas_interactive_voxelpainter.html", image: "assets/examples/canvas_interactive_voxelpainter.png" },
+			{ link: "examples/canvas_lights_pointlights.html", image: "assets/examples/canvas_lights_pointlights.png" },
+			{ link: "examples/canvas_lights_pointlights_smooth.html", image: "assets/examples/canvas_lights_pointlights_smooth.png" },
+			{ link: "examples/canvas_lines.html", image: "assets/examples/canvas_lines.png" },
+			{ link: "examples/canvas_lines_sphere.html", image: "assets/examples/canvas_lines_sphere.png" },
+			{ link: "examples/canvas_materials.html", image: "assets/examples/canvas_materials.png" },
+			{ link: "examples/canvas_materials_depth.html", image: "assets/examples/canvas_materials_depth.png" },
+			{ link: "examples/canvas_materials_normal.html", image: "assets/examples/canvas_materials_normal.png" },
+			{ link: "examples/canvas_materials_reflection.html", image: "assets/examples/canvas_materials_reflection.png" },
+			{ link: "examples/canvas_materials_video.html", image: "assets/examples/canvas_materials_video.png" },
+			{ link: "examples/canvas_particles_floor.html", image: "assets/examples/canvas_particles_floor.png" },
+			{ link: "examples/canvas_particles_random.html", image: "assets/examples/canvas_particles_random.png" },
+			{ link: "examples/canvas_particles_shapes.html", image: "assets/examples/canvas_particles_shapes.png" },
+			{ link: "examples/canvas_particles_sprites.html", image: "assets/examples/canvas_particles_sprites.png" },
+			{ link: "examples/canvas_particles_waves.html", image: "assets/examples/canvas_particles_waves.png" },
+			{ link: "examples/canvas_performance.html", image: "assets/examples/canvas_performance.png" },
+			{ link: "examples/canvas_sandbox.html", image: "assets/examples/canvas_sandbox.png" }
+		];
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			document.body.innerHTML += '<a href="' + file.link + '"><img src="' + file.image + '"></a>';
+
+		}
+
+		</script>
 
 		<br /><br /><br />
 
 		<h2>WebGLRenderer</h2>
 
-		<a href="examples/webgl_animation_skinning.html"><img src="assets/examples/webgl_animation_skinning.png"></a>
-		<a href="examples/webgl_collada.html"><img src="assets/examples/webgl_collada.png"></a>
-		<a href="examples/webgl_custom_attributes.html"><img src="assets/examples/webgl_custom_attributes.png"></a>
-		<a href="examples/webgl_custom_attributes_particles.html"><img src="assets/examples/webgl_custom_attributes_particles.png"></a>
-		<a href="examples/webgl_custom_attributes_particles2.html"><img src="assets/examples/webgl_custom_attributes_particles2.png"></a>
-		<a href="examples/webgl_custom_attributes_particles3.html"><img src="assets/examples/webgl_custom_attributes_particles3.png"></a>
-		<a href="examples/webgl_flycamera_earth.html"><img src="assets/examples/webgl_flycamera_earth.png"></a>
-		<a href="examples/webgl_geometries.html"><img src="assets/examples/webgl_geometries.png"></a>
-		<a href="examples/webgl_geometry_blenderexport_colors.html"><img src="assets/examples/webgl_geometry_blenderexport_colors.png"></a>
-		<a href="examples/webgl_geometry_colors.html"><img src="assets/examples/webgl_geometry_colors.png"></a>
-		<a href="examples/webgl_geometry_dynamic.html"><img src="assets/examples/webgl_geometry_dynamic.png"></a>
-		<a href="examples/webgl_geometry_hierarchy.html"><img src="assets/examples/webgl_geometry_hierarchy.png"></a>
-		<a href="examples/webgl_geometry_hierarchy2.html"><img src="assets/examples/webgl_geometry_hierarchy2.png"></a>
-		<a href="examples/webgl_geometry_large_mesh.html"><img src="assets/examples/webgl_geometry_large_mesh.png"></a>
-		<a href="examples/webgl_geometry_minecraft.html"><img src="assets/examples/webgl_geometry_minecraft.png"></a>
-		<a href="examples/webgl_geometry_minecraft_ao.html"><img src="assets/examples/webgl_geometry_minecraft_ao.png"></a>
-		<a href="examples/webgl_geometry_shapes.html"><img src="assets/examples/webgl_geometry_shapes.png"></a>
-		<a href="examples/webgl_geometry_terrain.html"><img src="assets/examples/webgl_geometry_terrain.png"></a>
-		<a href="examples/webgl_geometry_terrain_fog.html"><img src="assets/examples/webgl_geometry_terrain_fog.png"></a>
-		<a href="examples/webgl_geometry_text.html"><img src="assets/examples/webgl_geometry_text.png"></a>
-		<a href="examples/webgl_hdr.html"><img src="assets/examples/webgl_hdr.png"></a>
-		<a href="examples/webgl_interactive_cubes.html"><img src="assets/examples/webgl_interactive_cubes.png"></a>
-		<a href="examples/webgl_interactive_draggablecubes.html"><img src="assets/examples/webgl_interactive_draggablecubes.png"></a>
-		<a href="examples/webgl_interactive_voxelpainter.html"><img src="assets/examples/webgl_interactive_voxelpainter.png"></a>
-		<a href="examples/webgl_lights_pointlights.html"><img src="assets/examples/webgl_lights_pointlights.png"></a>
-		<a href="examples/webgl_lines_colors.html"><img src="assets/examples/webgl_lines_colors.png"></a>
-		<a href="examples/webgl_lines_cubes.html"><img src="assets/examples/webgl_lines_cubes.png"></a>
-		<a href="examples/webgl_lines_sphere.html"><img src="assets/examples/webgl_lines_sphere.png"></a>
-		<a href="examples/webgl_lines_splines.html"><img src="assets/examples/webgl_lines_splines.png"></a>
-		<a href="examples/webgl_lod.html"><img src="assets/examples/webgl_lod.png"></a>
-		<a href="examples/webgl_lod_text.html"><img src="assets/examples/webgl_lod_text.png"></a>
-		<a href="examples/webgl_materials.html"><img src="assets/examples/webgl_materials.png"></a>
-		<a href="examples/webgl_materials_cars.html"><img src="assets/examples/webgl_materials_cars.png"></a>
-		<a href="examples/webgl_materials_cars_anaglyph.html"><img src="assets/examples/webgl_materials_cars_anaglyph.png"></a>
-		<a href="examples/webgl_materials_cars_camaro.html"><img src="assets/examples/webgl_materials_cars_camaro.png"></a>
-		<a href="examples/webgl_materials_cars_camaro_crosseyed.html"><img src="assets/examples/webgl_materials_cars_camaro_crosseyed.png"></a>
-		<a href="examples/webgl_materials_cubemap.html"><img src="assets/examples/webgl_materials_cubemap.png"></a>
-		<a href="examples/webgl_materials_cubemap_balls_reflection.html"><img src="assets/examples/webgl_materials_cubemap_balls_reflection.png"></a>
-		<a href="examples/webgl_materials_cubemap_balls_reflection_anaglyph.html"><img src="assets/examples/webgl_materials_cubemap_balls_reflection_anaglyph.png"></a>
-		<a href="examples/webgl_materials_cubemap_balls_refraction.html"><img src="assets/examples/webgl_materials_cubemap_balls_refraction.png"></a>
-		<a href="examples/webgl_materials_cubemap_balls_refraction_crosseyed.html"><img src="assets/examples/webgl_materials_cubemap_balls_refraction_crosseyed.png"></a>
-		<a href="examples/webgl_materials_cubemap_escher.html"><img src="assets/examples/webgl_materials_cubemap_escher.png"></a>
-		<a href="examples/webgl_materials_cubemap_refraction.html"><img src="assets/examples/webgl_materials_cubemap_refraction.png"></a>
-		<a href="examples/webgl_materials_grass.html"><img src="assets/examples/webgl_materials_grass.png"></a>
-		<a href="examples/webgl_materials_normalmap.html"><img src="assets/examples/webgl_materials_normalmap.png"></a>
-		<a href="examples/webgl_materials_normalmap2.html"><img src="assets/examples/webgl_materials_normalmap2.png"></a>
-		<a href="examples/webgl_materials_shaders.html"><img src="assets/examples/webgl_materials_shaders.png"></a>
-		<a href="examples/webgl_materials_shaders_fresnel.html"><img src="assets/examples/webgl_materials_shaders_fresnel.png"></a>
-		<a href="examples/webgl_materials_texture_filters.html"><img src="assets/examples/webgl_materials_texture_filters.png"></a>
-		<a href="examples/webgl_materials_video.html"><img src="assets/examples/webgl_materials_video.png"></a>
-		<a href="examples/webgl_morphtargets.html"><img src="assets/examples/webgl_morphtargets.png"></a>
-		<a href="examples/webgl_morphtargets_horse.html"><img src="assets/examples/webgl_morphtargets_horse.png"></a>
-		<a href="examples/webgl_multiple_canvases_complex.html"><img src="assets/examples/webgl_multiple_canvases_complex.png"></a>
-		<a href="examples/webgl_multiple_canvases_grid.html"><img src="assets/examples/webgl_multiple_canvases_grid.png"></a>
-		<a href="examples/webgl_loader_json_objconverter.html"><img src="assets/examples/webgl_loader_json_objconverter.png"></a>
-		<a href="examples/webgl_panorama_equirectangular.html"><img src="assets/examples/webgl_panorama_equirectangular.png"></a>
-		<a href="examples/webgl_particles_billboards.html"><img src="assets/examples/webgl_particles_billboards.png"></a>
-		<a href="examples/webgl_particles_billboards_colors.html"><img src="assets/examples/webgl_particles_billboards_colors.png"></a>
-		<a href="examples/webgl_particles_dynamic.html"><img src="assets/examples/webgl_particles_dynamic.png"></a>
-		<a href="examples/webgl_particles_random.html"><img src="assets/examples/webgl_particles_random.png"></a>
-		<a href="examples/webgl_particles_sprites.html"><img src="assets/examples/webgl_particles_sprites.png"></a>
-		<a href="examples/webgl_performance.html"><img src="assets/examples/webgl_performance.png"></a>
-		<a href="examples/webgl_postprocessing.html"><img src="assets/examples/webgl_postprocessing.png"></a>
-		<a href="examples/webgl_postprocessing_dof.html"><img src="assets/examples/webgl_postprocessing_dof.png"></a>
-		<a href="examples/webgl_ribbons.html"><img src="assets/examples/webgl_ribbons.png"></a>
-		<a href="examples/webgl_rtt.html"><img src="assets/examples/webgl_rtt.png"></a>
-		<a href="examples/webgl_sandbox.html"><img src="assets/examples/webgl_sandbox.png"></a>
-		<a href="examples/webgl_scene_test.html"><img src="assets/examples/webgl_scene_test.png"></a>
-		<a href="examples/webgl_scene_test_blender.html"><img src="assets/examples/webgl_scene_test_blender.png"></a>
-		<a href="examples/webgl_shader.html"><img src="assets/examples/webgl_shader.png"></a>
-		<a href="examples/webgl_shader2.html"><img src="assets/examples/webgl_shader2.png"></a>
-		<a href="examples/webgl_shader_lava.html"><img src="assets/examples/webgl_shader_lava.png"></a>
-		<a href="examples/webgl_shadowmap.html"><img src="assets/examples/webgl_shadowmap.png"></a>
-		<a href="examples/webgl_sprites.html"><img src="assets/examples/webgl_sprites.png"></a>
-		<a href="examples/webgl_test_memory.html"><img src="assets/examples/webgl_test_memory.png"></a>
-		<a href="examples/webgl_trackballcamera_earth.html"><img src="assets/examples/webgl_trackballcamera_earth.png"></a>
-		<a href="examples/webgl_utf8loader.html"><img src="assets/examples/webgl_utf8loader.png"></a>
+		<script>
+
+		var files = [
+
+			{ link: "examples/webgl_animation_skinning.html", image: "assets/examples/webgl_animation_skinning.png" },
+			{ link: "examples/webgl_collada.html", image: "assets/examples/webgl_collada.png" },
+			{ link: "examples/webgl_custom_attributes.html", image: "assets/examples/webgl_custom_attributes.png" },
+			{ link: "examples/webgl_custom_attributes_particles.html", image: "assets/examples/webgl_custom_attributes_particles.png" },
+			{ link: "examples/webgl_custom_attributes_particles2.html", image: "assets/examples/webgl_custom_attributes_particles2.png" },
+			{ link: "examples/webgl_custom_attributes_particles3.html", image: "assets/examples/webgl_custom_attributes_particles3.png" },
+			{ link: "examples/webgl_flycamera_earth.html", image: "assets/examples/webgl_flycamera_earth.png" },
+			{ link: "examples/webgl_geometries.html", image: "assets/examples/webgl_geometries.png" },
+			{ link: "examples/webgl_geometry_blenderexport_colors.html", image: "assets/examples/webgl_geometry_blenderexport_colors.png" },
+			{ link: "examples/webgl_geometry_colors.html", image: "assets/examples/webgl_geometry_colors.png" },
+			{ link: "examples/webgl_geometry_dynamic.html", image: "assets/examples/webgl_geometry_dynamic.png" },
+			{ link: "examples/webgl_geometry_hierarchy.html", image: "assets/examples/webgl_geometry_hierarchy.png" },
+			{ link: "examples/webgl_geometry_hierarchy2.html", image: "assets/examples/webgl_geometry_hierarchy2.png" },
+			{ link: "examples/webgl_geometry_large_mesh.html", image: "assets/examples/webgl_geometry_large_mesh.png" },
+			{ link: "examples/webgl_geometry_minecraft.html", image: "assets/examples/webgl_geometry_minecraft.png" },
+			{ link: "examples/webgl_geometry_minecraft_ao.html", image: "assets/examples/webgl_geometry_minecraft_ao.png" },
+			{ link: "examples/webgl_geometry_shapes.html", image: "assets/examples/webgl_geometry_shapes.png" },
+			{ link: "examples/webgl_geometry_terrain.html", image: "assets/examples/webgl_geometry_terrain.png" },
+			{ link: "examples/webgl_geometry_terrain_fog.html", image: "assets/examples/webgl_geometry_terrain_fog.png" },
+			{ link: "examples/webgl_geometry_text.html", image: "assets/examples/webgl_geometry_text.png" },
+			{ link: "examples/webgl_hdr.html", image: "assets/examples/webgl_hdr.png" },
+			{ link: "examples/webgl_interactive_cubes.html", image: "assets/examples/webgl_interactive_cubes.png" },
+			{ link: "examples/webgl_interactive_draggablecubes.html", image: "assets/examples/webgl_interactive_draggablecubes.png" },
+			{ link: "examples/webgl_interactive_voxelpainter.html", image: "assets/examples/webgl_interactive_voxelpainter.png" },
+			{ link: "examples/webgl_lights_pointlights.html", image: "assets/examples/webgl_lights_pointlights.png" },
+			{ link: "examples/webgl_lines_colors.html", image: "assets/examples/webgl_lines_colors.png" },
+			{ link: "examples/webgl_lines_cubes.html", image: "assets/examples/webgl_lines_cubes.png" },
+			{ link: "examples/webgl_lines_sphere.html", image: "assets/examples/webgl_lines_sphere.png" },
+			{ link: "examples/webgl_lines_splines.html", image: "assets/examples/webgl_lines_splines.png" },
+			{ link: "examples/webgl_lod.html", image: "assets/examples/webgl_lod.png" },
+			{ link: "examples/webgl_lod_text.html", image: "assets/examples/webgl_lod_text.png" },
+			{ link: "examples/webgl_materials.html", image: "assets/examples/webgl_materials.png" },
+			{ link: "examples/webgl_materials_cars.html", image: "assets/examples/webgl_materials_cars.png" },
+			{ link: "examples/webgl_materials_cars_anaglyph.html", image: "assets/examples/webgl_materials_cars_anaglyph.png" },
+			{ link: "examples/webgl_materials_cars_camaro.html", image: "assets/examples/webgl_materials_cars_camaro.png" },
+			{ link: "examples/webgl_materials_cars_camaro_crosseyed.html", image: "assets/examples/webgl_materials_cars_camaro_crosseyed.png" },
+			{ link: "examples/webgl_materials_cubemap.html", image: "assets/examples/webgl_materials_cubemap.png" },
+			{ link: "examples/webgl_materials_cubemap_balls_reflection.html", image: "assets/examples/webgl_materials_cubemap_balls_reflection.png" },
+			{ link: "examples/webgl_materials_cubemap_balls_reflection_anaglyph.html", image: "assets/examples/webgl_materials_cubemap_balls_reflection_anaglyph.png" },
+			{ link: "examples/webgl_materials_cubemap_balls_refraction.html", image: "assets/examples/webgl_materials_cubemap_balls_refraction.png" },
+			{ link: "examples/webgl_materials_cubemap_balls_refraction_crosseyed.html", image: "assets/examples/webgl_materials_cubemap_balls_refraction_crosseyed.png" },
+			{ link: "examples/webgl_materials_cubemap_escher.html", image: "assets/examples/webgl_materials_cubemap_escher.png" },
+			{ link: "examples/webgl_materials_cubemap_refraction.html", image: "assets/examples/webgl_materials_cubemap_refraction.png" },
+			{ link: "examples/webgl_materials_grass.html", image: "assets/examples/webgl_materials_grass.png" },
+			{ link: "examples/webgl_materials_normalmap.html", image: "assets/examples/webgl_materials_normalmap.png" },
+			{ link: "examples/webgl_materials_normalmap2.html", image: "assets/examples/webgl_materials_normalmap2.png" },
+			{ link: "examples/webgl_materials_shaders.html", image: "assets/examples/webgl_materials_shaders.png" },
+			{ link: "examples/webgl_materials_shaders_fresnel.html", image: "assets/examples/webgl_materials_shaders_fresnel.png" },
+			{ link: "examples/webgl_materials_texture_filters.html", image: "assets/examples/webgl_materials_texture_filters.png" },
+			{ link: "examples/webgl_materials_video.html", image: "assets/examples/webgl_materials_video.png" },
+			{ link: "examples/webgl_morphtargets.html", image: "assets/examples/webgl_morphtargets.png" },
+			{ link: "examples/webgl_morphtargets_horse.html", image: "assets/examples/webgl_morphtargets_horse.png" },
+			{ link: "examples/webgl_multiple_canvases_complex.html", image: "assets/examples/webgl_multiple_canvases_complex.png" },
+			{ link: "examples/webgl_multiple_canvases_grid.html", image: "assets/examples/webgl_multiple_canvases_grid.png" },
+			{ link: "examples/webgl_loader_json_objconverter.html", image: "assets/examples/webgl_loader_json_objconverter.png" },
+			{ link: "examples/webgl_panorama_equirectangular.html", image: "assets/examples/webgl_panorama_equirectangular.png" },
+			{ link: "examples/webgl_particles_billboards.html", image: "assets/examples/webgl_particles_billboards.png" },
+			{ link: "examples/webgl_particles_billboards_colors.html", image: "assets/examples/webgl_particles_billboards_colors.png" },
+			{ link: "examples/webgl_particles_dynamic.html", image: "assets/examples/webgl_particles_dynamic.png" },
+			{ link: "examples/webgl_particles_random.html", image: "assets/examples/webgl_particles_random.png" },
+			{ link: "examples/webgl_particles_sprites.html", image: "assets/examples/webgl_particles_sprites.png" },
+			{ link: "examples/webgl_performance.html", image: "assets/examples/webgl_performance.png" },
+			{ link: "examples/webgl_postprocessing.html", image: "assets/examples/webgl_postprocessing.png" },
+			{ link: "examples/webgl_postprocessing_dof.html", image: "assets/examples/webgl_postprocessing_dof.png" },
+			{ link: "examples/webgl_ribbons.html", image: "assets/examples/webgl_ribbons.png" },
+			{ link: "examples/webgl_rtt.html", image: "assets/examples/webgl_rtt.png" },
+			{ link: "examples/webgl_sandbox.html", image: "assets/examples/webgl_sandbox.png" },
+			{ link: "examples/webgl_scene_test.html", image: "assets/examples/webgl_scene_test.png" },
+			{ link: "examples/webgl_scene_test_blender.html", image: "assets/examples/webgl_scene_test_blender.png" },
+			{ link: "examples/webgl_shader.html", image: "assets/examples/webgl_shader.png" },
+			{ link: "examples/webgl_shader2.html", image: "assets/examples/webgl_shader2.png" },
+			{ link: "examples/webgl_shader_lava.html", image: "assets/examples/webgl_shader_lava.png" },
+			{ link: "examples/webgl_shadowmap.html", image: "assets/examples/webgl_shadowmap.png" },
+			{ link: "examples/webgl_sprites.html", image: "assets/examples/webgl_sprites.png" },
+			{ link: "examples/webgl_test_memory.html", image: "assets/examples/webgl_test_memory.png" },
+			{ link: "examples/webgl_trackballcamera_earth.html", image: "assets/examples/webgl_trackballcamera_earth.png" },
+			{ link: "examples/webgl_utf8loader.html", image: "assets/examples/webgl_utf8loader.png" }
+		];
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			document.body.innerHTML += '<a href="' + file.link + '"><img src="' + file.image + '"></a>';
+
+		}
+
+		</script>
 
 		<br /><br /><br />
 
-
 		<h2>Misc</h2>
 
-		<a href="examples/misc_camera_path.html"><img src="assets/examples/misc_camera_path.png"></a>
-		<a href="examples/misc_camera_roll.html"><img src="assets/examples/misc_camera_roll.png"></a>
-		<a href="examples/misc_camera_trackball.html"><img src="assets/examples/misc_camera_trackball.png"></a>
-		<a href="examples/misc_lights_test.html"><img src="assets/examples/misc_lights_test.png"></a>
-		<a href="examples/misc_lookat.html"><img src="assets/examples/misc_lookat.png"></a>
-		<a href="examples/misc_materials_multimaterials.html"><img src="assets/examples/misc_materials_multimaterials.png"></a>
-		<a href="examples/misc_sound.html"><img src="assets/examples/misc_sound.png"></a>
-		<a href="examples/misc_ubiquity_test.html"><img src="assets/examples/misc_ubiquity_test.png"></a>
+		<script>
+
+		var files = [
+
+			{ link: "examples/misc_camera_path.html", image: "assets/examples/misc_camera_path.png" },
+			{ link: "examples/misc_camera_roll.html", image: "assets/examples/misc_camera_roll.png" },
+			{ link: "examples/misc_camera_trackball.html", image: "assets/examples/misc_camera_trackball.png" },
+			{ link: "examples/misc_lights_test.html", image: "assets/examples/misc_lights_test.png" },
+			{ link: "examples/misc_lookat.html", image: "assets/examples/misc_lookat.png" },
+			{ link: "examples/misc_materials_multimaterials.html", image: "assets/examples/misc_materials_multimaterials.png" },
+			{ link: "examples/misc_sound.html", image: "assets/examples/misc_sound.png" },
+			{ link: "examples/misc_ubiquity_test.html", image: "assets/examples/misc_ubiquity_test.png" }
+
+		];
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			document.body.innerHTML += '<a href="' + file.link + '"><img src="' + file.image + '"></a>';
+
+		}
+
+		</script>
 
 	</body>
 </html>
