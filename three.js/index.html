@@ -10,13 +10,34 @@
 				color: #808080;
 				background-color: #ffffff;
 
-				padding: 30px;
+				margin: 0px;
+				padding: 33px 5px 30px 200px;
+
+				font-family: Monospace;
 
 			}
 
-			h1, h2 {
+			h1 { 
+				font-size: 30px;
+			}
 
-				font-family: Monospace;
+			h2 { 
+				font-size: 20px;
+			}
+
+			#panel	{
+
+				position: fixed;
+
+				left: 0px;
+				top: 0px;
+
+				width: 180px;
+				height: 100%;
+
+				padding: 20px 0px 0px 20px;
+
+				font-size: 18px;
 
 			}
 
@@ -24,9 +45,12 @@
 	</head>
 	<body>
 
-		<h1><a href="http://github.com/mrdoob/three.js/">three.js</a> examples</h1>
-
-		<br />
+		<div id="panel">
+			<h1>three.js</h1>
+			<a href="http://mrdoob.github.com/three.js/docs/latest/">documentation</a>
+			<a href="http://github.com/mrdoob/three.js/contributors">contributors</a>
+			<a href="http://github.com/mrdoob/three.js/">github</a>
+		</div>
 
 		<h2>CanvasRenderer</h2>
 
