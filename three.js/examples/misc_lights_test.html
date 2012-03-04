@@ -17,7 +17,7 @@
 			a { color:skyblue }
 			canvas { pointer-events:none; z-index:10; }
 
-			#d { text-align:center; margin:1em 0 -15.7em 0; z-index:0; position:relative; display:block }
+			#d { text-align:center; margin:1em 0 -11.4em 0; z-index:0; position:relative; display:block }
 			.button { background:#000; color:#fff; padding:0.2em 0.5em; cursor:pointer }
 			.inactive { background:#999; color:#eee }
 		</style>
@@ -121,7 +121,6 @@
 				lightMesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) );
 				lightMesh.scale.x = lightMesh.scale.y = lightMesh.scale.z = 0.05;
 				lightMesh.position = pointLight.position;
-				lightMesh.overdraw = true;
 				scene.add( lightMesh );
 
 
@@ -137,7 +136,7 @@
 
 					try {
 
-						webglRenderer = new THREE.WebGLRenderer();
+						webglRenderer = new THREE.WebGLRenderer( { alpha: true } );
 						webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 						webglRenderer.domElement.style.position = "relative";
 						container.appendChild( webglRenderer.domElement );
@@ -190,19 +189,25 @@
 
 				camera.lookAt( scene.position );
 
-				for ( var i = 0, l = scene.objects.length; i < l; i ++ ) {
+				for ( var i = 0, l = scene.children.length; i < l; i ++ ) {
 
-					if ( i%3 == 1 )
+					var object = scene.children[ i ];
 
-						scene.objects[i].rotation.z += 0.05;
+					if ( object instanceof THREE.Mesh ) {
 
-					else if ( i%3 == 2 )
+						if ( i % 3 == 1 )
 
-						scene.objects[i].rotation.y += 0.05;
+							object.rotation.z += 0.05;
 
-					else if ( i%3 == 0 )
+						else if ( i % 3 == 2 )
 
-						scene.objects[i].rotation.x += 0.05;
+							object.rotation.y += 0.05;
+
+						else if ( i % 3 == 0 )
+
+							object.rotation.x += 0.05;
+
+					}
 
 				}
 

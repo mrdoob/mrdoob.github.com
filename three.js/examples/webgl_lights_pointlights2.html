@@ -79,7 +79,9 @@
 
 				// CONTROLS
 
-				if ( 1 ) {
+				var fly = false;
+
+				if ( !fly ) {
 
 					controls = new THREE.TrackballControls( camera );
 					controls.target.set( 0, 0, 0 );
@@ -255,8 +257,6 @@
 
 			function render() {
 
-				controls.update( clock.getDelta() );
-
 				var time = Date.now() * 0.00025;
 				var z = 20, d = 150;
 
@@ -277,6 +277,8 @@
 
 				light6.position.x = Math.cos( time * 0.7 ) * d;
 				light6.position.z = Math.cos( time * 0.5 ) * d;
+
+				controls.update( clock.getDelta() );
 
 				renderer.render( scene, camera );
 
