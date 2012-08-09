@@ -60,11 +60,15 @@ code {
 	width: -moz-calc( 100% - 40px );
 	width: calc( 100% - 40px );
 	padding: 20px;
-	white-space: pre;
+	white-space: pre-line;
 	background-color: #f9f9f9;
 	overflow: auto;
 }
 
+strong {
+	color: #000;
+	font-weight: normal;
+}
 
 #button {
 	position: fixed;
