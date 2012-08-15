@@ -41,7 +41,7 @@
 			textures from <a href="http://ro.me">ro.me</a> - fly with WASD/RF/QE + mouse
 		</div>
 
-		<script src="../build/Three.js"></script>
+		<script src="../build/three.min.js"></script>
 
 		<script src="js/Stats.js"></script>
 
@@ -79,8 +79,6 @@
 				// scene
 
 				scene = new THREE.Scene();
-				scene.add( camera );
-
 				scene.fog = new THREE.Fog( 0x000000, 3500, 15000 );
 				scene.fog.color.setHSV( 0.51, 0.6, 0.025 );
 
