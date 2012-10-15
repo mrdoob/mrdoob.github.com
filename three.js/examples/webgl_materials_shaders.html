@@ -42,7 +42,7 @@
 		<script src="../build/three.min.js"></script>
 
 		<script src="js/Detector.js"></script>
-		<script src="js/Stats.js"></script>
+		<script src="js/libs/stats.min.js"></script>
 
 		<script>
 
@@ -165,13 +165,9 @@
 
 				}
 
-				if ( render_canvas ) {
-
-					canvasRenderer = new THREE.CanvasRenderer();
-					canvasRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-					container.appendChild( canvasRenderer.domElement );
-
-				}
+				canvasRenderer = new THREE.CanvasRenderer();
+				canvasRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+				container.appendChild( canvasRenderer.domElement );
 
 				//
 
