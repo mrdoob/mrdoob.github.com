@@ -85,21 +85,21 @@
 		</script>
 
 		<div id="panel">
-			<h1>three.js<span style="font-size: 50%; vertical-align: super;"> r52</span></h1>
+			<h1>three.js<span style="font-size: 50%; vertical-align: super;"> r53</span></h1>
 
-			<a href="https://github.com/mrdoob/three.js/zipball/master">download</a><br /><br />
+			<a href="http://github.com/mrdoob/three.js/zipball/master">download</a><br /><br />
 
 			<a href="http://www.aerotwist.com/lab/getting-started-with-three-js/">getting started</a><br />
-			<a href="http://mrdoob.github.com/three.js/docs/">documentation</a><br />
+			<a href="docs/">documentation</a><br />
 			<a href="http://webchat.freenode.net/?channels=three.js">chat</a><br />
 			<a href="http://stackoverflow.com/questions/tagged/three.js">help</a><br /><br />
 
 			<a href="http://github.com/mrdoob/three.js/">github</a><br />
 			<a href="http://github.com/mrdoob/three.js/contributors">contributors</a><br />
-			<a href="https://github.com/mrdoob/three.js/wiki">wiki</a><br />
-			<a href="https://github.com/mrdoob/three.js/issues">issues</a><br /><br />
+			<a href="http://github.com/mrdoob/three.js/wiki">wiki</a><br />
+			<a href="http://github.com/mrdoob/three.js/issues">issues</a><br /><br />
 
-			<a href="http://mrdoob.github.com/three.js/editor/">editor</a> (alpha)
+			<a href="editor/">editor</a> (beta)
 
 		</div>
 
@@ -109,6 +109,8 @@
 
 		var files = [
 
+			[ "100000stars", "http://workshop.chromeexperiments.com/stars/" ],
+			[ "theywilleatyou", "http://theywilleatyou.com/" ],
 			[ "blast", "http://blast.hellohikimori.com/" ],
 			[ "webglupandrunning", "http://shop.oreilly.com/product/0636920024729.do?sortby=publicationDate" ],
 			[ "hexgl", "http://hexgl.bkcore.com/" ],
@@ -320,12 +322,37 @@
 			"webgl_terrain_dynamic",
 			"webgl_test_memory",
 			"webgl_test_memory2",
-			"webgl_trackballcamera_earth",
 			"webgl_trails"
 
 		];
 
 		var element = document.getElementById( 'webgl' );
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			element.innerHTML += '<a href="examples/' + file + '.html"><img src="files/examples/' + file + '.png" width="200" height="150"></a>';
+
+		}
+
+		</script>
+
+
+		<h2>css3d examples</h2>
+		<div id="css3d" class="images"></div>
+		<script>
+
+		var files = [
+
+			"css3d_molecules",
+			"css3d_panorama",
+			"css3d_periodictable",
+			"css3d_sandbox",
+			"css3d_youtube"
+
+		];
+
+		var element = document.getElementById( 'css3d' );
 
 		for ( var i = 0; i < files.length; i ++ ) {
 
@@ -395,17 +422,17 @@
 
 		var files = [
 
-			"misc_camera_fly",
-			"misc_camera_path",
-			"misc_camera_orbit",
-			"misc_camera_roll",
-			"misc_camera_trackball",
+			"misc_controls_fly",
+			"misc_controls_path",
+			"misc_controls_orbit",
+			"misc_controls_roll",
+			"misc_controls_trackball",
+			"misc_controls_pointerlock",
 			"misc_lights_test",
 			"misc_lookat",
 			"misc_software",
 			"misc_sound",
 			"misc_ubiquity_test"
-			// "misc_uv_tests"
 
 		];
 
