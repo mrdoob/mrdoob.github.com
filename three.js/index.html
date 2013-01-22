@@ -209,7 +209,10 @@
 
 			"webgl_animation_cloth",
 			"webgl_animation_skinning",
+			"webgl_animation_skinning_morph",
 			"webgl_buffergeometry",
+			"webgl_buffergeometry_lines",
+			"webgl_buffergeometry_particles",
 			"webgl_camera",
 			"webgl_custom_attributes",
 			"webgl_custom_attributes_lines",
@@ -344,6 +347,30 @@
 		</script>
 
 
+		<h2>webgl deferred examples</h2>
+		<div id="deferred" class="images"></div>
+		<script>
+
+		var files = [
+
+			"webgldeferred_animation",
+			"webgldeferred_arealights",
+			"webgldeferred_pointlights"
+
+		];
+
+		var element = document.getElementById( 'deferred' );
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			element.innerHTML += '<a href="examples/' + file + '.html" target="_blank"><img src="files/examples/' + file + '.png" width="200" height="150"></a>';
+
+		}
+
+		</script>
+
+
 		<h2>css3d examples</h2>
 		<div id="css3d" class="images"></div>
 		<script>
@@ -422,6 +449,28 @@
 		</script>
 
 
+		<h2>software examples</h2>
+		<div id="software" class="images"></div>
+		<script>
+
+		var files = [
+
+			"software_sandbox"
+
+		];
+
+		var element = document.getElementById( 'software' );
+
+		for ( var i = 0; i < files.length; i ++ ) {
+
+			var file = files[ i ];
+			element.innerHTML += '<a href="examples/' + file + '.html" target="_blank"><img src="files/examples/' + file + '.png" width="200" height="150"></a>';
+
+		}
+
+		</script>
+
+
 		<h2>misc examples</h2>
 		<div id="misc" class="images"></div>
 		<script>
@@ -436,7 +485,6 @@
 			"misc_controls_pointerlock",
 			"misc_lights_test",
 			"misc_lookat",
-			"misc_software",
 			"misc_sound",
 			"misc_ubiquity_test"
 
