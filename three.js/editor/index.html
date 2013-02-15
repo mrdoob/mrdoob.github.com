@@ -81,6 +81,7 @@
 		<script src="../examples/js/loaders/ctm/CTMLoader.js"></script>
 		<script src="../examples/js/exporters/GeometryExporter.js"></script>
 		<script src="../examples/js/exporters/SceneExporter.js"></script>
+		<script src="../examples/js/exporters/SceneExporter2.js"></script>
 		<script src="../examples/js/exporters/OBJExporter.js"></script>
 
 		<script src="js/libs/signals.min.js"></script>
@@ -254,12 +255,12 @@
 
 								var loader = new THREE.JSONLoader();
 
-								loader.createModel( data, function ( geometry ) {
+								loader.createModel( data, function ( geometry, materials ) {
 
 									geometry.sourceType = "ascii";
 									geometry.sourceFile = file.name;
 
-									var mesh = new THREE.Mesh( geometry, createDummyMaterial() );
+									var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
 									mesh.name = filename;
 
 									signals.objectAdded.dispatch( mesh );
