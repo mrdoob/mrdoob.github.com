@@ -12,13 +12,49 @@ THREE.SceneExporter2.prototype = {
 
 		var output = {
 			metadata: {
-				formatVersion : 4.0,
-				type : "scene",
-				generatedBy : "SceneExporter"
+				version: 4.0,
+				type: 'scene',
+				generator: 'SceneExporter'
 			}
 		};
 
 		console.log( scene );
+
+		//
+
+		var geometries = {};
+		var geometryExporter = new THREE.GeometryExporter();
+
+		var parseGeometry = function ( geometry ) {
+
+			if ( geometries[ geometry.id ] === undefined ) {
+
+				if ( output.geometries === undefined ) {
+
+					output.geometries = [];
+
+				}
+
+				geometries[ geometry.id ] = output.geometries.length;
+
+				output.geometries.push( geometryExporter.parse( geometry ) );
+
+			}
+
+			return geometries[ geometry.id ];
+
+		};
+		
+		/*
+		var materials = {};
+		var materialExporter = new THREE.MaterialExporter();
+
+		var parseMaterial = function ( material ) {
+
+
+
+		};
+		*/
 
 		var parseObject = function ( object ) {
 
@@ -69,7 +105,7 @@ THREE.SceneExporter2.prototype = {
 			} else if ( object instanceof THREE.SpotLight ) {
 
 				data.type = 'SpotLight';
-				data.color = object.color.getHex();	
+				data.color = object.color.getHex();
 				data.intensity = object.intensity;
 				data.position = object.position.toArray();
 
@@ -84,6 +120,7 @@ THREE.SceneExporter2.prototype = {
 				data.position = object.position.toArray();
 				data.rotation = object.rotation.toArray();
 				data.scale = object.scale.toArray();
+				data.geometry = parseGeometry( object.geometry );
 
 			} else {
 
@@ -93,6 +130,8 @@ THREE.SceneExporter2.prototype = {
 				data.scale = object.scale.toArray();
 
 			}
+
+			data.userData = object.userData;
 
 			// parse children
 
@@ -114,7 +153,7 @@ THREE.SceneExporter2.prototype = {
 
 		output.scene = parseObject( scene ).children;
 
-		return JSON.stringify( output, null, '\t' );
+		return output;
 
 	}
 
